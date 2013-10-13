@@ -1,1 +1,55 @@
-test
+<!DOCTYPE html>
+<html>
+<head >
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<style>
+      html, body, #map-canvas {
+      	width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbSCjuMfECjoa5q3TGzPPXDYg7A0GxNEQ&sensor=true"></script>
+	<script type="text/javascript">
+		var map;
+		window.onload = function() {
+			navigator.geolocation.watchPosition(show_map, handle_error, {enableHighAccuracy: true});
+		}
+
+		function show_map(position) {
+			var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			
+			var mapOptions = {
+				zoom: 17,
+				center: myLatlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			var marker = new google.maps.Marker({
+			    position: myLatlng,
+			    map: map,
+			    title:"Position"
+			});
+
+			alert("Accuracy: " + position.coords.accuracy + " meters");
+			alert("Accuracy: " + position.coords.speed + "m/s");
+		}
+
+		function handle_error(err) {
+			if (err.code = 1) {
+				alert("User don't give authorization");
+			} else if (err.code = 2) {
+				alert("Position unavailable");
+			} else {
+				// ERR CODE 3
+				alert("timeout occurred");
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="map-canvas"></div>
+</body>
+</html>
