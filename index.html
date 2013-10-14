@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 		var map;
 		window.onload = function() {
-			navigator.geolocation.watchPosition(show_map, handle_error, {enableHighAccuracy: true});
+			navigator.geolocation.watchPosition(show_map, handle_error, {enableHighAccuracy: true, timeout: 100000});
 		}
 
 		function show_map(position) {
