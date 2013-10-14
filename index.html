@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 		var map;
 		window.onload = function() {
-			navigator.geolocation.watchPosition(show_map, handle_error, {enableHighAccuracy: true});
+			navigator.geolocation.watchPosition(show_map, handle_error, {enableHighAccuracy: true, timeout: 100000});
 		}
 
 		function show_map(position) {
@@ -32,15 +32,12 @@
 			    map: map,
 			    title:"Position"
 			});
-
-			alert("Accuracy: " + position.coords.accuracy + " meters");
-			alert("Accuracy: " + position.coords.speed + "m/s");
 		}
 
 		function handle_error(err) {
-			if (err.code = 1) {
-				alert("User don't give authorization");
-			} else if (err.code = 2) {
+			if (err.code == 1) {
+				alert("Authorization denied");
+			} else if (err.code == 2) {
 				alert("Position unavailable");
 			} else {
 				// ERR CODE 3
