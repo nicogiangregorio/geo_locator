@@ -32,14 +32,11 @@
 			    map: map,
 			    title:"Position"
 			});
-
-			alert("Accuracy: " + position.coords.accuracy + " meters");
-			alert("Accuracy: " + position.coords.speed + "m/s");
 		}
 
 		function handle_error(err) {
 			if (err.code = 1) {
-				alert("User don't give authorization");
+				alert("Authorization denied");
 			} else if (err.code = 2) {
 				alert("Position unavailable");
 			} else {
